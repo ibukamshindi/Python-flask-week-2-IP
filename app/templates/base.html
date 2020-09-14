@@ -1,7 +1,3 @@
-{% extends 'base.html'%}
-{% import 'macros.html' as macro%}
-
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,11 +6,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title> Home - Welcome to the best News app</title>
-    {% endif %}
+     <title>{{ title }}</title>
+     {% else %}
+     <title>Home - News Highlight</title>
+     {% endif %}
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
@@ -23,6 +20,9 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <!-- Content Block -->
+    {% block content %} 
+    {% endblock %}
     
     <script src="" async defer></script>
   </body>
