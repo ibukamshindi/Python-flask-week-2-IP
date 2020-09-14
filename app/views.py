@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template,request,redirect,url_for
 from app import app
 from .request import get_news, get_articles
 
@@ -10,5 +10,15 @@ def index():
     '''
     new_News = get_news('news')
     title = 'Home - Welcome to the best News app'
-    return render_template('index.html', title = title, news = new_News)
+    return render_template('index.html', title = title, new_News = new_News)
+
+@app.route('/articles/<source_id>')
+def source(source_id):
+    """
+    View for top story articles
+    """
+    
+    source_and_articles = get_articles(source_id)
+    return render_template('articles.html', source_and_articles=source_and_articles)
+
 
