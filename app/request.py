@@ -1,6 +1,6 @@
 
 import urllib.request,json
-from .models import News, Articles
+from .models import Sources, Articles
 
 
 api_key = None
@@ -12,57 +12,56 @@ def configure_request(app):
     api_key = app.config['NEWS_API_KEY']
    
 
-def get_news(news):
+def get_sources(source):
     """
     Function to retrieve news sources list from the News api
     """
 
-    get_news_url = base_url.format(news, api_key)
+    get_sources_url = 'https://newsapi.org/v1/sources'.format(source, api_key)
 
-    with urllib.request.urlopen(get_news_url) as url:
-        get_news_data = url.read()
-        get_news_response = json.loads(get_news_data)
+    with urllib.request.urlopen(get_sources_url) as url:
+        get_sources_data = url.read()
+        get_sources_response = json.loads(get_sources_data)
 
-        news_results = None
+        sources_results = None
 
-        if get_news_response['news']:
-            news_results_list = get_news_response['news']
-            news_results = process_results(news_results_list)
+        if get_sources_response['sources']:
+            sources_results_list = get_sources_response['sources']
+            sources_results = process_results(sources_results_list)
 
-    return news_results
+    return sources_results
 
 
-def process_results(news_list):
+def process_results(sources_list):
     """
-    Function that process the news results list and transforms them into a list of objects
-    Args: sources_list: A list of dictionaries that contains news details
+    Function that process the nresults list and transforms them into a list of objects
+    Args: sources_list: A list of dictionaries that contains news sources details
     Returns:
-    news_results: a list of news sources objects
+    sources_results: a list of news sources objects
     """
 
-    news_results = []
-    for news_item in news_list:
-        source_id = news_item.get('id')
-        name = news_item.get('name')
-        description = news_item.get('description')
-        url = news_item.get('url')
-        category = news_item.get('category')
-        language = news_item.get('language')
-        country = news_item.get('country')
+    sources_results = []
+    for source_item in sources_list:
+        source_id = source_item.get('id')
+        name = source_item.get('name')
+        description = source_item.get('description')
+        url = source_item.get('url')
+        category = source_item.get('category')
+        language = source_item.get('language')
+        country = source_item.get('country')
 
-        news_object = News(source_id, name, description, url, category, language, country)
-        news_results.append(news_object)
+        source_object = Sources(source_id, name, description, url, category, language, country)
+        sources_results.append(source_object)
 
-    return news_results
+    return sources_results
 
 
-def get_articles(news):
+def get_articles(source):
     """
     Function to retrieve news sources list from the News api
     """
 
- 
-    get_articles_url = base_url.format(news, api_key)
+    get_articles_url = 'https://newsapi.org/v1/articles?source={}&apiKey={}'.format(source, api_key)
     with urllib.request.urlopen(get_articles_url) as url:
         get_articles_data = url.read()
         get_articles_response = json.loads(get_articles_data)
