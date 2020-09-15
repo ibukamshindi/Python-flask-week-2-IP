@@ -2,11 +2,11 @@
         {% for source in news_sources %}
           <div class="col-sm-4">
             <a href="/articles/{{source.source_id}}">
-              <h3 style="font-weight:normal">{{ source.name}}</h3>
+              <h3 style="font-weight:bold">{{ source.name}}</h3>
             </a>
             <br>
             <div class="well" style="height:200px">
-                <p style="font-weight:normal">{{ source.description|truncate(200)}}</p>
+                <p style="font-weight:bold">{{ source.description|truncate(200)}}</p>
             </div>
           </div>
         {% endfor %}
