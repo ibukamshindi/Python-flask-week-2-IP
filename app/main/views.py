@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for
-from app import app
-from .request import get_news, get_articles
+from .import main
+from ..request import get_news, get_articles
 
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
@@ -12,7 +12,7 @@ def index():
     title = 'Home - Welcome to the best News app'
     return render_template('index.html', title = title, new_News = new_News)
 
-@app.route('/articles/<source_id>')
+@main.route('/articles/<source_id>')
 def source(source_id):
     """
     View for top story articles
