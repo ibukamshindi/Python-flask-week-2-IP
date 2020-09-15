@@ -1,4 +1,3 @@
-
 class News:
     """
     News class to define the news source object
